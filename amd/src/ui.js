@@ -215,33 +215,35 @@ export const updateVisualLevelIndicators = function(ed) {
             continue;
         }
 
+        // Ignore spans that are not begin or end tags.
+        if (!span.classList.contains(classFiltercodeEnd)) {
+            continue;
+        }
         // Match end tags with begin tags.
-        if (span.classList.contains(classFiltercodeEnd)) {
-            const top = keyStack[keyStack.length - 1];
-            // If the top of the stack is not the corresponding begin tag, then we have an imbalanced filtercode.
-            // We need to determine if the end tag is the correct one or if the begin tag is missing.
-            if (isNull(top) || top.dataset.filtercodekey !== span.dataset.filtercodekey) {
-                // Check if there is a corresponding begin tag.
-                if (keyStack.find((begin) => begin.dataset.filtercodekey === span.dataset.filtercodekey)) {
-                    // If the begin tag is found, remove all tags on top of it.
-                    while (keyStack.length > 0
-                        && keyStack[keyStack.length - 1].dataset.filtercodekey !== span.dataset.filtercodekey) {
-                        // Remove the top of the stack and mark it as imbalanced.
-                        ed.dom.addClass(keyStack.pop(), classFiltercodeError);
-                    }
-                } else {
-                    // If the begin tag is not found, then mark the end tag as imbalanced.
-                    ed.dom.addClass(span, classFiltercodeError);
-                    continue;
+        const top = keyStack[keyStack.length - 1];
+        // If the top of the stack is not the corresponding begin tag, then we have an imbalanced filtercode.
+        // We need to determine if the end tag is the correct one or if the begin tag is missing.
+        if (isNull(top) || top.dataset.filtercodekey !== span.dataset.filtercodekey) {
+            // Check if there is a corresponding begin tag.
+            if (keyStack.find((begin) => begin.dataset.filtercodekey === span.dataset.filtercodekey)) {
+                // If the begin tag is found, remove all tags on top of it.
+                while (keyStack.length > 0
+                    && keyStack[keyStack.length - 1].dataset.filtercodekey !== span.dataset.filtercodekey) {
+                    // Remove the top of the stack and mark it as imbalanced.
+                    ed.dom.addClass(keyStack.pop(), classFiltercodeError);
                 }
-            }
-            if (keyStack.length > 0) {
-                // If the top of the stack is the corresponding begin tag, then remove it.
-                ed.dom.addClass(keyStack.pop(), classFiltercodeLevel(keyStack.length));
-                ed.dom.addClass(span, classFiltercodeLevel(keyStack.length));
             } else {
+                // If the begin tag is not found, then mark the end tag as imbalanced.
                 ed.dom.addClass(span, classFiltercodeError);
+                continue;
             }
+        }
+        if (keyStack.length > 0) {
+            // If the top of the stack is the corresponding begin tag, then remove it.
+            ed.dom.addClass(keyStack.pop(), classFiltercodeLevel(keyStack.length));
+            ed.dom.addClass(span, classFiltercodeLevel(keyStack.length));
+        } else {
+            ed.dom.addClass(span, classFiltercodeError);
         }
     }
     // If the stack is not empty, then we have an imbalanced filtercode.
