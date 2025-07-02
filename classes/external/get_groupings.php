@@ -36,16 +36,21 @@ use core_external\external_warnings;
 use core_external\util;
 use Exception;
 
-defined('MOODLE_INTERNAL') || die;
-
+/**
+ * Grouping external api.
+ *
+ * @package    tiny_filtercodes
+ * @category   webservice
+ * @copyright  2025 onwards Leon Camus
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class get_groupings extends external_api {
     /**
      * Parameters for execute.
      *
      * @return external_function_parameters
      */
-    public static function execute_parameters(): external_function_parameters
-    {
+    public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters([
             'courseid' => new external_value(PARAM_INT, 'Course ID', VALUE_REQUIRED),
         ]);
@@ -69,14 +74,13 @@ class get_groupings extends external_api {
             ]
         );
 
-        // now security checks
         $context = context_course::instance($courseid, IGNORE_MISSING);
         try {
             self::validate_context($context);
         } catch (Exception $e) {
             throw new moodle_exception('errorcoursecontextnotvalid' , 'webservice', '', (object) [
                 'message' => $e->getMessage(),
-                'courseid' => $courseid
+                'courseid' => $courseid,
             ]);
         }
         require_capability('moodle/course:managegroups', $context);

@@ -31,8 +31,14 @@ use core_external\external_function_parameters;
 use core_external\external_multiple_structure;
 use core_external\external_value;
 
-defined('MOODLE_INTERNAL') || die;
-
+/**
+ * Custom Content external api.
+ *
+ * @package    tiny_filtercodes
+ * @category   webservice
+ * @copyright  2025 onwards Leon Camus
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class get_course_customfields extends external_api {
     /**
      * Parameters for execute.

@@ -23,8 +23,6 @@ use editor_tiny\plugin_with_menuitems;
 use editor_tiny\plugin_with_buttons;
 use editor_tiny\plugin_with_configuration;
 
-defined('MOODLE_INTERNAL') || die;
-
 /**
  * Plugin for Moodle 'Filtercodes plugin' drop down menu in TinyMCE 6.
  *
@@ -107,7 +105,7 @@ class plugininfo extends plugin implements plugin_with_menuitems, plugin_with_bu
 
         return [
             'mfiltercodesfilter' => $mfiltercodesfilter || self::is_filtercodes_simulated_for_test(),
-            'css' => self::get_default_css(), // TODO get from settings
+            'css' => self::get_default_css(), // TODO get from settings.
         ];
     }
 

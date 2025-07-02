@@ -36,16 +36,21 @@ use core_external\external_warnings;
 use core_external\util;
 use Exception;
 
-defined('MOODLE_INTERNAL') || die;
-
+/**
+ * Grouping external api.
+ *
+ * @package    tiny_filtercodes
+ * @category   webservice
+ * @copyright  2025 onwards Leon Camus
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class get_categories extends external_api {
     /**
      * Parameters for execute.
      *
      * @return external_function_parameters
      */
-    public static function execute_parameters(): external_function_parameters
-    {
+    public static function execute_parameters(): external_function_parameters {
         global $CFG;
         require_once($CFG->dirroot . "/course/externallib.php");
         return \core_course_external::get_categories_parameters();
