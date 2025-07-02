@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * External functions and service definitions.
  *
@@ -27,6 +26,8 @@
  * @copyright  2025 onwards Leon Camus
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+defined('MOODLE_INTERNAL') || die();
 
 $functions = [
     'tiny_filtercodes_get_groups' => [

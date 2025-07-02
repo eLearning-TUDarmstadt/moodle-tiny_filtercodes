@@ -79,7 +79,7 @@ class get_groups extends external_api {
         } catch (Exception $e) {
             throw new moodle_exception('errorcoursecontextnotvalid' , 'webservice', '', (object) [
                 'message' => $e->getMessage(),
-                'courseid' => $courseid
+                'courseid' => $courseid,
             ]);
         }
         require_capability('moodle/course:managegroups', $context);

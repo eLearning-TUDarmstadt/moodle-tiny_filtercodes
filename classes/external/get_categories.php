@@ -63,7 +63,7 @@ class get_categories extends external_api {
      * @param boolean $addsubcategories obtain only the category (false) or its subcategories (true - default)
      * @return array list of categories
      */
-    public static function execute($criteria = array(), $addsubcategories = true): array {
+    public static function execute($criteria = [], $addsubcategories = true): array {
         global $CFG;
         require_once($CFG->dirroot . "/course/externallib.php");
         return \core_course_external::get_categories($criteria, $addsubcategories);
