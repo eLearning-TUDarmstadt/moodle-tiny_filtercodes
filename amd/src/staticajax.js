@@ -22,8 +22,8 @@
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 define({
-    load: function (name, req, onload, config) {
-        req(['./ajax'], function (ajax) {
+    load: function(name, req, onload, config) {
+        req(['./ajax'], function(ajax) {
             if (config.isBuild) {
                 onload();
                 return;
@@ -31,6 +31,7 @@ define({
             const promise = ajax[name]();
             promise.then(function(result) {
                 onload(result);
+                return result;
             }).catch(function() {
                 onload([]);
             });

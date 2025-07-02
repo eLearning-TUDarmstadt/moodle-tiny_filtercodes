@@ -33,7 +33,7 @@ export const classFiltercodeBegin = 'filtercodes-begin';
 export const classFiltercodeEnd = 'filtercodes-end';
 export const classFiltercodeError = 'filtercodes-error';
 export const classFiltercodeLevel = (i) => 'filtercodes-level-' + (i % 10);
-export const classFiltercodeLevels = Array.from({ length: 10 }, (_, i) => classFiltercodeLevel(i));
+export const classFiltercodeLevels = Array.from({length: 10}, (_, i) => classFiltercodeLevel(i));
 export const regexTagStartEnd = /\{(\/)?\s*([a-zA-Z0-9]+)((?:\s+[^}\s]+)+)?\s*}/g;
 
 /**

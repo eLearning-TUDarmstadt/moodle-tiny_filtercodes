@@ -240,6 +240,7 @@ const renderText = async function(argid, currentArg, placeholder) {
  * @param {(string|null)[]} currentArgs
  * @return {Promise<string[]|null>}
  */
+// eslint-disable-next-line complexity
 export const openArgumentModal = async function(key, currentArgs) {
     const filtercode = filtercodeMap[key];
     if (isNull(filtercode)) {
@@ -272,19 +273,19 @@ export const openArgumentModal = async function(key, currentArgs) {
             if (!isNull(currentArgs[0])) {
                 if (!currentArgs[0].startsWith('"')) {
                     throw new Error('Quoted text argument must start with a double quote');
-                } else {
-                    let j = 0;
-                    while (j < currentArgs.length && !currentArgs[j].endsWith('"')) {
-                        j++;
-                    }
-                    if (j === currentArgs.length) {
-                        throw new Error('Quoted text argument must end with a double quote');
-                    }
-                    currentArg = currentArgs.splice(0, j + 1).join(' ');
-                    currentArgs = currentArgs.splice(j);
-                    // Remove the quotes.
-                    currentArg = currentArg.substring(1, currentArg.length - 1);
                 }
+
+                let j = 0;
+                while (j < currentArgs.length && !currentArgs[j].endsWith('"')) {
+                    j++;
+                }
+                if (j === currentArgs.length) {
+                    throw new Error('Quoted text argument must end with a double quote');
+                }
+                currentArg = currentArgs.splice(0, j + 1).join(' ');
+                currentArgs = currentArgs.splice(j);
+                // Remove the quotes.
+                currentArg = currentArg.substring(1, currentArg.length - 1);
             }
             data.args.push((async() => ({
                 id: argid,
