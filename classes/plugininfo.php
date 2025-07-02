@@ -76,6 +76,16 @@ class plugininfo extends plugin implements plugin_with_menuitems, plugin_with_bu
     }
 
     /**
+     * There is a config setting that can be set to true for testing purposes so that even though the
+     * filtercodes filter is missing, the behat tests can be executed pretending that the filtercodes filter
+     * is installed.
+     * @return bool is simulated
+     */
+    public static function is_filtercodes_simulated_for_test(): bool {
+        return \behat_util::is_test_site() && get_config('tiny_filtercodes', 'simulatefiltercodes');
+    }
+
+    /**
      * Returns the configuration values the plugin needs to take into consideration
      *
      * @param context $context
@@ -96,7 +106,7 @@ class plugininfo extends plugin implements plugin_with_menuitems, plugin_with_bu
         $mfiltercodesfilter = array_key_exists('filtercodes', $filters);
 
         return [
-            'mfiltercodesfilter' => $mfiltercodesfilter,
+            'mfiltercodesfilter' => $mfiltercodesfilter || self::is_filtercodes_simulated_for_test(),
             'css' => self::get_default_css(), // TODO get from settings
         ];
     }
