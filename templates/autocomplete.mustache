@@ -76,11 +76,11 @@
 {{#js}}
     require(['core/form-autocomplete'], function(module) {
         module.enhance({{#quote}}#{{id}}{{/quote}},
-        {{tags}},
+        {{#tags}}true{{/tags}}{{^tags}}false{{/tags}},
         {{#ajax}}{{#quote}}{{ajax}}{{/quote}}{{/ajax}}{{^ajax}}null{{/ajax}},
         {{#quote}}{{placeholder}}{{/quote}},
-        {{casesensitive}},
-        {{showsuggestions}},
+        {{#casesensitive}}true{{/casesensitive}}{{^casesensitive}}false{{/casesensitive}},
+        {{#showsuggestions}}true{{/showsuggestions}}{{^showsuggestions}}false{{/showsuggestions}},
         {{#quote}}{{noselectionstring}}{{/quote}});
     });
 {{/js}}
