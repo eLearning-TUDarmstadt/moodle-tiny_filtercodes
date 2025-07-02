@@ -130,7 +130,9 @@ export class Filtercode {
         }
         node.setAttribute('contenteditable', 'false');
         node.dataset.filtercodekey = this.id;
-        node.dataset.filtercodeargs = args.join(' ');
+        if (args.length > 0) {
+            node.dataset.filtercodeargs = args.join(' ');
+        }
         if (this.around) {
             node.classList.add(classFiltercodeBegin);
         }

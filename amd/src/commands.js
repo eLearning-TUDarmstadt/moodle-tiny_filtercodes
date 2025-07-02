@@ -91,11 +91,22 @@ export const getSetup = async() => {
                 tooltip: editTag,
                 onAction: () => onEdit(editor, event),
             });
-            editor.ui.registry.addContextToolbar(component, {
+            editor.ui.registry.addContextToolbar(component + '_0', {
                 predicate: (node) => node.classList.contains(classFiltercode)
-                    && !node.classList.contains(classFiltercodeError),
+                    && !node.classList.contains(classFiltercodeError)
+                    && node.hasAttribute('data-filtercodeargs'),
                 items: [
                     `${component}_edit`,
+                    `${component}_remove`,
+                ].join(' '),
+                position: 'node',
+                scope: 'node'
+            });
+            editor.ui.registry.addContextToolbar(component + '_1', {
+                predicate: (node) => node.classList.contains(classFiltercode)
+                    && !node.classList.contains(classFiltercodeError)
+                    && !node.hasAttribute('data-filtercodeargs'),
+                items: [
                     `${component}_remove`,
                 ].join(' '),
                 position: 'node',
