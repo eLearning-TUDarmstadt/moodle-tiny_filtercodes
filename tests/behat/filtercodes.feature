@@ -1,4 +1,4 @@
-@editor @editor_tiny @tiny_filtercodes @javascript
+@editor @editor_tiny @tiny @tiny_filtercodes @javascript
 Feature: Tiny editor plugin with filtercodes
   To put dynamic content into text, I use the filtercodes button to encapsulate the text in filtercodes tags.
 
