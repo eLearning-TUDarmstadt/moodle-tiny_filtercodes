@@ -55,13 +55,16 @@ class get_customcontent extends external_api {
      * @return array The custom content.
      */
     public static function execute(): array {
+        $context = \context_system::instance();
+        self::validate_context($context);
+        require_capability('tiny/filtercodes:get_customcontent', $context);
+
         $globaltagcount = get_config('filter_filtercodes', 'globaltagcount');
         $tags = [];
         for ($i = 1; $i <= $globaltagcount; $i++) {
             $tags[] = [
                 'id' => $i,
                 'key' => get_config('filter_filtercodes', 'globalname' . $i),
-                'value' => get_config('filter_filtercodes', 'globalcontent' . $i),
             ];
         }
 
@@ -76,7 +79,6 @@ class get_customcontent extends external_api {
             new external_single_structure([
                 'id' => new external_value(PARAM_INT, 'id'),
                 'key' => new external_value(PARAM_TEXT, 'key'),
-                'value' => new external_value(PARAM_RAW, 'value'),
             ])
         );
     }
